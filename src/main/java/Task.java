@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Task implements Comparable<Task>{
     private Priorities priority;
     private String name;
@@ -49,5 +51,25 @@ public class Task implements Comparable<Task>{
         if(this.priority.ordinal() < t.getPriority().ordinal())
             return -1;
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (getPriority() != task.getPriority()) return false;
+        if (!getName().equals(task.getName())) return false;
+        return getTime().equals(task.getTime());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getPriority().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getTime().hashCode();
+        return result;
     }
 }

@@ -10,6 +10,10 @@ public class TasksQueue {
         queue.addAll(Arrays.asList(tasks));
     }
 
+    public TasksQueue(){
+        this.queue = new PriorityQueue<Task>();
+    }
+
     public boolean add(Task task){
     /* Добавляет элементы в очередь. Возвращает true - при успешном добавлении,
     false - в случае провала*/
@@ -29,6 +33,13 @@ public class TasksQueue {
     public Task show(){
     // Возвращает первый элемент в очереди. Если элемента нет - возвращает null
         return queue.peek();
+    }
+
+    public void clear(){
+    // Очищает очередь
+        while(!queue.isEmpty()){
+            queue.poll();
+        };
     }
 
     public boolean deleteFirstTask(){
