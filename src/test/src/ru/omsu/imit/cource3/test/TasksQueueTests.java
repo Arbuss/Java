@@ -5,6 +5,7 @@ import org.junit.Test;
 import src.ru.omsu.imit.cource3.main.TasksQueue;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TasksQueueTests {
     @Test
@@ -63,6 +64,11 @@ public class TasksQueueTests {
 
         assertEquals(t1, tq.show());
         assertEquals(t1, tq.show());
+
+        tq.clear();
+
+        assertNull(tq.show());
+        assertNull(tq.get());
     }
 
     @Test
