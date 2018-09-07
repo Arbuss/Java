@@ -1,4 +1,10 @@
+package src.ru.omsu.imit.cource3.test;
+
+import src.ru.omsu.imit.cource3.main.Priorities;
+import src.ru.omsu.imit.cource3.main.Task;
 import org.junit.Test;
+import src.ru.omsu.imit.cource3.main.TasksQueue;
+
 import static org.junit.Assert.assertEquals;
 
 public class TasksQueueTests {

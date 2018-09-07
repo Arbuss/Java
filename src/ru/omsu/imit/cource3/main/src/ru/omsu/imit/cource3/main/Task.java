@@ -1,4 +1,4 @@
-import java.util.Objects;
+package src.ru.omsu.imit.cource3.main;
 
 public class Task implements Comparable<Task>{
     private Priorities priority;
@@ -13,12 +13,6 @@ public class Task implements Comparable<Task>{
 
     public Task(){
         this("default", "0:0:0", Priorities.Default);
-    }
-
-    public Task(Task source){
-        this.name = source.getName();
-        this.time = source.getTime();
-        this.priority = source.getPriority();
     }
 
     public Priorities getPriority() {
