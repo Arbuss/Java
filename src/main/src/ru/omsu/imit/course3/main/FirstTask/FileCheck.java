@@ -1,13 +1,13 @@
-package src.ru.omsu.imit.cource3.main.FirstTask;
+package src.ru.omsu.imit.course3.main.FirstTask;
 
 import java.io.File;
 import java.io.IOException;
 
-public class Main {
+public class FileCheck {
     public static void main(String[] args) throws IOException {
         //Файлы
-        /*File file = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//cource3//main//FirstTask//dir//file.txt");
+        File file = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
+                "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir//file.txt");
 
         System.out.println(file.getName());
         System.out.println(file.getAbsolutePath());
@@ -16,13 +16,13 @@ public class Main {
         else
             System.out.println(true);
         file.renameTo(new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//cource3//main//FirstTask//dir//newName"));
+                "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir//newName"));
         System.out.println(file.isFile());
-        file.delete();*/
+        file.delete();
 
         //Каталоги
-        /*File dir = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-        "src//main//src//ru//omsu//imit//cource3//main//FirstTask//dir");
+        File dir = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
+        "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir");
 
         if(!dir.exists())
             dir.mkdir();
@@ -42,7 +42,10 @@ public class Main {
         }
 
         dir.renameTo(new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//cource3//main//FirstTask//newDir"));
-        dir.delete();*/
+                "src//main//src//ru//omsu//imit//course3//main//FirstTask//newDir"));
+        dir.delete();
+
+
+
     }
 }

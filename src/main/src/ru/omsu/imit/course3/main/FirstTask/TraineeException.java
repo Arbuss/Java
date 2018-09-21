@@ -1,4 +1,4 @@
-package src.ru.omsu.imit.cource3.main.FirstTask;
+package src.ru.omsu.imit.course3.main.FirstTask;
 
 public class TraineeException extends Exception {
     private String message;

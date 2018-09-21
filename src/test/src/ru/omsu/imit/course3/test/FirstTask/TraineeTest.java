@@ -1,15 +1,19 @@
-package src.ru.omsu.imit.cource3.test.FirstTask;
+package src.ru.omsu.imit.course3.test.FirstTask;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import src.ru.omsu.imit.cource3.main.FirstTask.Trainee;
-import src.ru.omsu.imit.cource3.main.FirstTask.TraineeException;
+import src.ru.omsu.imit.course3.main.FirstTask.Trainee;
+import src.ru.omsu.imit.course3.main.FirstTask.TraineeException;
 
 public class TraineeTest {
     @Test
     public void ConstructorTest() throws TraineeException {
         Trainee tr = new Trainee("fn", "sn", 5);
+
+        assertEquals("fn", tr.getFirstName());
+        assertEquals("sn", tr.getSecondName());
+        assertEquals(5, tr.getMark());
     }
 
     @Test (expected = TraineeException.class)
