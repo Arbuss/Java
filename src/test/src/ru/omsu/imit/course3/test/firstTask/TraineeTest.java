@@ -1,10 +1,10 @@
-package src.ru.omsu.imit.course3.test.FirstTask;
+package src.ru.omsu.imit.course3.test.firstTask;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import src.ru.omsu.imit.course3.main.FirstTask.Trainee;
-import src.ru.omsu.imit.course3.main.FirstTask.TraineeException;
+import src.ru.omsu.imit.course3.main.firstTask.Trainee;
+import src.ru.omsu.imit.course3.main.firstTask.TraineeException;
 
 public class TraineeTest {
     @Test

@@ -1,4 +1,4 @@
-package src.ru.omsu.imit.course3.main.FirstTask;
+package src.ru.omsu.imit.course3.main.firstTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +7,7 @@ public class FileCheck {
     public static void main(String[] args) throws IOException {
         //Файлы
         File file = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir//file.txt");
+                "src//main//src//ru//omsu//imit//course3//main//firstTask//dir//file.txt");
 
         System.out.println(file.getName());
         System.out.println(file.getAbsolutePath());
@@ -16,13 +16,13 @@ public class FileCheck {
         else
             System.out.println(true);
         file.renameTo(new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir//newName"));
+                "src//main//src//ru//omsu//imit//course3//main//firstTask//dir//newName"));
         System.out.println(file.isFile());
         file.delete();
 
         //Каталоги
         File dir = new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-        "src//main//src//ru//omsu//imit//course3//main//FirstTask//dir");
+        "src//main//src//ru//omsu//imit//course3//main//firstTask//dir");
 
         if(!dir.exists())
             dir.mkdir();
@@ -42,7 +42,7 @@ public class FileCheck {
         }
 
         dir.renameTo(new File("C://Проекты студентов и преподавателей//3 курс//Buss//course3-1//" +
-                "src//main//src//ru//omsu//imit//course3//main//FirstTask//newDir"));
+                "src//main//src//ru//omsu//imit//course3//main//firstTask//newDir"));
         dir.delete();
 
 

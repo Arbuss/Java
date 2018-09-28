@@ -1,4 +1,4 @@
-package src.ru.omsu.imit.course3.main.FirstTask;
+package src.ru.omsu.imit.course3.main.firstTask;
 
 public enum TraineeErrorCodes {
     EMPTY_FIRST_NAME("First name is empty"),
