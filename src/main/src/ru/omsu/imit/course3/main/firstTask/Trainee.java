@@ -1,6 +1,8 @@
 package src.ru.omsu.imit.course3.main.firstTask;
 
-public class Trainee {
+import java.io.Serializable;
+
+public class Trainee implements Serializable {
     private String firstName;
     private String secondName;
     private int mark;
