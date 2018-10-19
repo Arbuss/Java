@@ -1,6 +1,6 @@
-package src.ru.omsu.imit.course3.main.firstTask;
+package ru.omsu.imit.course3.main.first_task;
 
-import java.io.*;
+import java.util.Objects;
 
 public class Rectangle {
     private Point2D leftTop;
@@ -34,5 +34,20 @@ public class Rectangle {
     @Override
     public String toString() {
         return leftTop.x + ";" + leftTop.y + ";" + rightBottom.x + ";" + rightBottom.y + ";";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rectangle)) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Objects.equals(getLeftTop(), rectangle.getLeftTop()) &&
+                Objects.equals(getRightBottom(), rectangle.getRightBottom());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getLeftTop(), getRightBottom());
     }
 }

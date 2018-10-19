@@ -1,4 +1,4 @@
-package src.ru.omsu.imit.course3.main.firstTask;
+package ru.omsu.imit.course3.main.first_task;
 
 import java.io.Serializable;
 
@@ -65,5 +65,10 @@ public class Trainee implements Serializable {
         result = 31 * result + getSecondName().hashCode();
         result = 31 * result + getMark();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "fN:" + firstName + ";sN:" + secondName + ";m:" + mark;
     }
 }
