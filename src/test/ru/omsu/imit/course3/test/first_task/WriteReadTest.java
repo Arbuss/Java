@@ -18,8 +18,8 @@ public class WriteReadTest {
     @Test
     public void rectangleWriteTest() throws IOException {
         Rectangle rectangle = new Rectangle(2, 4, 6, 8);
-        StaticMethods.rectangleWrite(rectangle);
-        Rectangle rectangle1 = StaticMethods.rectangleRead(rectangle);
+        StaticMethods.rectangleWrite("files//rectangles.bin", rectangle);
+        Rectangle rectangle1 = StaticMethods.rectangleRead(rectangle, "files//rectangles.bin");
 
         assertEquals(2.0, rectangle1.getLeftTop().x, 0.0);
         assertEquals(4.0, rectangle1.getLeftTop().y, 0.0);
@@ -42,24 +42,26 @@ public class WriteReadTest {
                 new Rectangle(2.4, 2.3, 2.2, 2.1),
                 new Rectangle(1.4, 1.3, 1.2, 1.1),
         };
-        StaticMethods.rectangleWrite(rectanglesArray);
-        Rectangle[] rectanglesArray1 = StaticMethods.rectangleReadToArray();
+        StaticMethods.rectangleWrite("files//rectangles.bin", rectanglesArray);
+        Rectangle[] rectanglesArray1 = StaticMethods.rectangleReadToArray("files//rectangles.bin");
         assertArrayEquals(rectanglesArray2, rectanglesArray1);
+
+        StaticMethods.rectanglesToPrintStream(rectanglesArray1);
     }
 
     @Test
     public void traineeWriteTest() throws TraineeException, IOException {
         Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
-        StaticMethods.traineeWriteWithLineSeparation(trainee);
-        Trainee trainee1 = StaticMethods.traineeRead();
+        StaticMethods.traineeWriteWithLineSeparation(trainee, "files//trainee.txt");
+        Trainee trainee1 = StaticMethods.traineeRead("files//trainee.txt");
         assertEquals(trainee, trainee1);
     }
 
     @Test
     public void traineeWriteTest2() throws TraineeException, IOException {
         Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
-        StaticMethods.traineeWrite(trainee);
-        Trainee trainee1 = StaticMethods.traineeRead2();
+        StaticMethods.traineeWrite(trainee, "files//trainee.txt");
+        Trainee trainee1 = StaticMethods.traineeRead2("files//trainee.txt");
         assertEquals(trainee, trainee1);
     }
 
@@ -67,14 +69,19 @@ public class WriteReadTest {
     public void serializeTest() throws TraineeException, IOException {
         Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
 
-        StaticMethods.serializeWrite(StaticMethods.serialize(trainee));
+        StaticMethods.serializeWrite(StaticMethods.serialize(trainee), "files//serialize.bin");
 
-        Trainee trainee1 = StaticMethods.serializeRead();
+        Trainee trainee1 = StaticMethods.serializeRead("files//serialize.bin");
         assertEquals(trainee, trainee1);
     }
 
     @Test
-    public void serializeByteStreamTest() throws TraineeException {
-        Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
+    public void serializeByteStreamTest() throws TraineeException, IOException, ClassNotFoundException {
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+
+        StaticMethods.ByteArrayOutputStreamSerialization(trainee, "files//serializeBaos.bin");
+        //Trainee trainee1 = (Trainee) StaticMethods.ByteArrayInputStreamDeserialization();
+        StaticMethods.ByteArrayInputStreamDeserialization("files//serializeBaos.bin");
+        //assertEquals(trainee, trainee1);
     }
 }
