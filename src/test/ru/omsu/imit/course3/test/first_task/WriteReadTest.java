@@ -8,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import ru.omsu.imit.course3.main.first_task.rectangle.Rectangle;
-import ru.omsu.imit.course3.main.first_task.StaticMethods;
 import ru.omsu.imit.course3.main.first_task.rectangle.RectangleInput;
 import ru.omsu.imit.course3.main.first_task.rectangle.RectangleOutput;
 import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
@@ -97,7 +96,12 @@ public class WriteReadTest {
     }
 
     @Test
-    public void serializeByGsonToFile() throws TraineeException{
+    public void serializeByGsonToFile() throws TraineeException, IOException {
         Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+        TraineeOutput.serializeByGson(trainee, "files//serializeBaos.bin");
+
+        Trainee trainee1 = TraineeInput.deserializeByGson("files//serializeBaos.bin");
+
+        assertEquals(trainee, trainee1);
     }
 }

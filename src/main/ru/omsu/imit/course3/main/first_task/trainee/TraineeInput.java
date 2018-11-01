@@ -75,8 +75,16 @@ public class TraineeInput {
         return new Trainee(firstName, secondName, mark);
     }
 
-    public static  Trainee DeserializeByGson(String json){
+    public static Trainee DeserializeByGson(String json){
         Gson gson = new Gson();
         return gson.fromJson(json, Trainee.class);
+    }
+
+    public static Trainee deserializeByGson(String filePath) throws IOException {
+        String json;
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            json = br.readLine();
+        }
+        return DeserializeByGson(json);
     }
 }

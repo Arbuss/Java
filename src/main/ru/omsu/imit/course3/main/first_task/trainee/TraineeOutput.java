@@ -13,8 +13,7 @@ public class TraineeOutput {
     }
 
     public static void traineeWrite(Trainee trainee, String filePath) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(filePath);
-             PrintStream ps = new PrintStream(fos)) {
+        try (PrintStream ps = new PrintStream(new FileOutputStream(filePath))){
             ps.printf("%s %s %d", trainee.getFirstName(), trainee.getSecondName(), trainee.getMark());
         }
     }
@@ -51,5 +50,12 @@ public class TraineeOutput {
     public static String serializeByGson(Trainee trainee){
         Gson gson = new Gson();
         return gson.toJson(trainee);
+    }
+
+    public static void serializeByGson(Trainee trainee, String filePath) throws IOException {
+        String json = serializeByGson(trainee);
+        try (PrintStream ps = new PrintStream(new FileOutputStream(filePath))) {
+            ps.print(json);
+        }
     }
 }
