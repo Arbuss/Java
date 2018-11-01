@@ -3,8 +3,8 @@ package ru.omsu.imit.course3.test.first_task;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import ru.omsu.imit.course3.main.first_task.Trainee;
-import ru.omsu.imit.course3.main.first_task.TraineeException;
+import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
 
 public class TraineeTest {
     @Test

@@ -1,16 +1,20 @@
 package ru.omsu.imit.course3.test.first_task;
 
+import com.google.gson.Gson;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import ru.omsu.imit.course3.main.first_task.Rectangle;
+import ru.omsu.imit.course3.main.first_task.rectangle.Rectangle;
 import ru.omsu.imit.course3.main.first_task.StaticMethods;
-import ru.omsu.imit.course3.main.first_task.Trainee;
-import ru.omsu.imit.course3.main.first_task.TraineeException;
-import ru.omsu.imit.course3.main.first_task.*;
+import ru.omsu.imit.course3.main.first_task.rectangle.RectangleInput;
+import ru.omsu.imit.course3.main.first_task.rectangle.RectangleOutput;
+import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
+import ru.omsu.imit.course3.main.first_task.trainee.TraineeInput;
+import ru.omsu.imit.course3.main.first_task.trainee.TraineeOutput;
 
 import java.io.IOException;
 
@@ -18,8 +22,8 @@ public class WriteReadTest {
     @Test
     public void rectangleWriteTest() throws IOException {
         Rectangle rectangle = new Rectangle(2, 4, 6, 8);
-        StaticMethods.rectangleWrite("files//rectangles.bin", rectangle);
-        Rectangle rectangle1 = StaticMethods.rectangleRead(rectangle, "files//rectangles.bin");
+        RectangleOutput.rectangleWrite("files//rectangles.bin", rectangle);
+        Rectangle rectangle1 = RectangleInput.rectangleRead(rectangle, "files//rectangles.bin");
 
         assertEquals(2.0, rectangle1.getLeftTop().x, 0.0);
         assertEquals(4.0, rectangle1.getLeftTop().y, 0.0);
@@ -42,36 +46,36 @@ public class WriteReadTest {
                 new Rectangle(2.4, 2.3, 2.2, 2.1),
                 new Rectangle(1.4, 1.3, 1.2, 1.1),
         };
-        StaticMethods.rectangleWrite("files//rectangles.bin", rectanglesArray);
-        Rectangle[] rectanglesArray1 = StaticMethods.rectangleReadToArray("files//rectangles.bin");
+        RectangleOutput.rectangleWrite("files//rectangles.bin", rectanglesArray);
+        Rectangle[] rectanglesArray1 = RectangleInput.rectangleReadToArray("files//rectangles.bin");
         assertArrayEquals(rectanglesArray2, rectanglesArray1);
 
-        StaticMethods.rectanglesToPrintStream(rectanglesArray1);
+        RectangleOutput.rectanglesToPrintStream(rectanglesArray1);
     }
 
     @Test
     public void traineeWriteTest() throws TraineeException, IOException {
-        Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
-        StaticMethods.traineeWriteWithLineSeparation(trainee, "files//trainee.txt");
-        Trainee trainee1 = StaticMethods.traineeRead("files//trainee.txt");
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+        TraineeOutput.traineeWriteWithLineSeparation(trainee, "files//trainee.txt");
+        Trainee trainee1 = TraineeInput.traineeRead("files//trainee.txt");
         assertEquals(trainee, trainee1);
     }
 
     @Test
     public void traineeWriteTest2() throws TraineeException, IOException {
-        Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
-        StaticMethods.traineeWrite(trainee, "files//trainee.txt");
-        Trainee trainee1 = StaticMethods.traineeRead2("files//trainee.txt");
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+        TraineeOutput.traineeWrite(trainee, "files//trainee.txt");
+        Trainee trainee1 = TraineeInput.traineeRead2("files//trainee.txt");
         assertEquals(trainee, trainee1);
     }
 
     @Test
     public void serializeTest() throws TraineeException, IOException {
-        Trainee trainee = new Trainee("Андрей", "Чмеренко", 5);
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
 
-        StaticMethods.serializeWrite(StaticMethods.serialize(trainee), "files//serialize.bin");
+        TraineeOutput.serializeWrite(trainee, "files//serialize.bin");
 
-        Trainee trainee1 = StaticMethods.serializeRead("files//serialize.bin");
+        Trainee trainee1 = TraineeInput.serializeRead("files//serialize.bin");
         assertEquals(trainee, trainee1);
     }
 
@@ -79,9 +83,21 @@ public class WriteReadTest {
     public void serializeByteStreamTest() throws TraineeException, IOException, ClassNotFoundException {
         Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
 
-        StaticMethods.ByteArrayOutputStreamSerialization(trainee, "files//serializeBaos.bin");
-        //Trainee trainee1 = (Trainee) StaticMethods.ByteArrayInputStreamDeserialization();
-        StaticMethods.ByteArrayInputStreamDeserialization("files//serializeBaos.bin");
-        //assertEquals(trainee, trainee1);
+        TraineeOutput.ByteArrayOutputStreamSerialize(trainee, "files//serializeBaos.bin");
+        Trainee trainee1 = TraineeInput.ByteArrayInputStreamDeserialize("files//serializeBaos.bin");
+        assertEquals(trainee, trainee1);
+    }
+
+    @Test
+    public void serializeByGson() throws TraineeException {
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+        Trainee trainee1 = TraineeInput.DeserializeByGson(TraineeOutput.serializeByGson(trainee));
+
+        assertEquals(trainee, trainee1);
+    }
+
+    @Test
+    public void serializeByGsonToFile() throws TraineeException{
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
     }
 }
