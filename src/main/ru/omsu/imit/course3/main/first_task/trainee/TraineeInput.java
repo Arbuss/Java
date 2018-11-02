@@ -44,7 +44,7 @@ public class TraineeInput {
         return new Trainee(firstName, secondName, mark);
     }
 
-    public static Trainee ByteArrayInputStreamDeserialize(String filePath) throws IOException, TraineeException {
+    public static Trainee byteArrayInputStreamDeserialize(String filePath) throws IOException, TraineeException {
         byte[] buffer;
 
         try(DataInputStream dis = new DataInputStream(new FileInputStream(filePath))){
@@ -75,7 +75,7 @@ public class TraineeInput {
         return new Trainee(firstName, secondName, mark);
     }
 
-    public static Trainee DeserializeByGson(String json){
+    public static Trainee deserializeFromGson(String json){
         Gson gson = new Gson();
         return gson.fromJson(json, Trainee.class);
     }
@@ -85,6 +85,6 @@ public class TraineeInput {
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             json = br.readLine();
         }
-        return DeserializeByGson(json);
+        return deserializeFromGson(json);
     }
 }

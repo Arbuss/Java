@@ -32,7 +32,7 @@ public class TraineeOutput {
         }
     }
 
-    public static void ByteArrayOutputStreamSerialize(Trainee trainee, String filePath) throws IOException {
+    public static void byteArrayOutputStreamSerialize(Trainee trainee, String filePath) throws IOException {
         byte[] firstName = trainee.getFirstName().getBytes();
         byte[] secondName = trainee.getSecondName().getBytes();
         byte mark = (byte) trainee.getMark();

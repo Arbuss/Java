@@ -82,15 +82,15 @@ public class WriteReadTest {
     public void serializeByteStreamTest() throws TraineeException, IOException, ClassNotFoundException {
         Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
 
-        TraineeOutput.ByteArrayOutputStreamSerialize(trainee, "files//serializeBaos.bin");
-        Trainee trainee1 = TraineeInput.ByteArrayInputStreamDeserialize("files//serializeBaos.bin");
+        TraineeOutput.byteArrayOutputStreamSerialize(trainee, "files//serializeBaos.bin");
+        Trainee trainee1 = TraineeInput.byteArrayInputStreamDeserialize("files//serializeBaos.bin");
         assertEquals(trainee, trainee1);
     }
 
     @Test
     public void serializeByGson() throws TraineeException {
         Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
-        Trainee trainee1 = TraineeInput.DeserializeByGson(TraineeOutput.serializeByGson(trainee));
+        Trainee trainee1 = TraineeInput.deserializeFromGson(TraineeOutput.serializeByGson(trainee));
 
         assertEquals(trainee, trainee1);
     }
