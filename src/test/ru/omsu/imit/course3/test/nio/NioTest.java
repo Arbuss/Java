@@ -17,4 +17,12 @@ public class NioTest {
 
         assertEquals(trainee, trainee1);
     }
+
+    @Test
+    public void mappedByteBufferTest() throws TraineeException, IOException {
+        Trainee trainee = new Trainee("Andrew", "Chmerenko", 5);
+        Trainee trainee1 = NioReader.mappedByteBufferReader("files//trainee.txt");
+
+        assertEquals(trainee, trainee1);
+    }
 }
