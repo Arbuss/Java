@@ -30,4 +30,16 @@ public class NioReader {
             return new Trainee(params[0], params[1], Integer.parseInt(params[2]));
         }
     }
+
+    public static int[] dataInputStreamReader(String filePath) throws IOException {
+        try(DataInputStream dis = new DataInputStream(new FileInputStream(filePath))){
+            int[] intsArray = new int[dis.available()];
+            byte[] bytesArray = new byte[dis.available()];
+            dis.read(bytesArray);
+            for(int i = 0; i < bytesArray.length; i++){
+                intsArray[i] = (int)bytesArray[i];
+            }
+            return intsArray;
+        }
+    }
 }
