@@ -12,9 +12,8 @@ import java.nio.charset.StandardCharsets;
 
 public class NioProcessor {
     public static ByteBuffer serializeToByteBuffer(Trainee trainee) throws IOException {
-        int size = Integer.BYTES + trainee.getFirstName().getBytes().length + trainee.getSecondName().getBytes().length;
         String json = TraineeOutput.serializeByGson(trainee);
-        ByteBuffer bb = ByteBuffer.allocate(json.getBytes().length);
+        ByteBuffer bb = ByteBuffer.allocate(json.length());
         bb.put(json.getBytes());
         return bb;
     }
