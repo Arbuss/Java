@@ -2,7 +2,7 @@ package ru.omsu.imit.course3.main.first_task.trainee;
 
 import java.io.Serializable;
 
-public class Trainee implements Serializable {
+public class Trainee implements Serializable, Comparable {
     private String firstName;
     private String secondName;
     private int mark;
@@ -70,5 +70,14 @@ public class Trainee implements Serializable {
     @Override
     public String toString() {
         return "fN:" + firstName + ";sN:" + secondName + ";m:" + mark;
+    }
+
+    public int compareTo(Trainee trainee) {
+        return firstName.compareTo(trainee.getFirstName());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
