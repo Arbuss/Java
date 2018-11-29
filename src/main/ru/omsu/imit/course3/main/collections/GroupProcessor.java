@@ -20,6 +20,6 @@ public class GroupProcessor {
     }
 
     public static Trainee findTrainee(Group group, String name){
-        return Arrays.stream(group.getTrainees()).filter().findFirst().get();
+        return Arrays.stream(group.getTrainees()).filter(x -> x.getFirstName().equals(name)).findFirst().get();
     }
 }
