@@ -7,29 +7,13 @@ import java.util.*;
 
 public class GroupProcessor {
     public static Group sortByMarks(Group group) throws GroupException {
-        Set<Trainee> sortedSet = new TreeSet(Comparator.comparingInt(Trainee::getMark));
-        sortedSet.addAll(Arrays.asList(group.getTrainees()));
-        Trainee[] trainees = new Trainee[sortedSet.size()];
-        Iterator it = sortedSet.iterator();
-        int traineesIndex = 0;
-        while(it.hasNext()){
-            trainees[traineesIndex] = (Trainee) it.next();
-            traineesIndex++;
-        }
-        return new Group(group.getName(), trainees);
+        Arrays.sort(group.getTrainees(), Comparator.comparingInt(Trainee::getMark));
+        return new Group(group.getName(), group.getTrainees());
     }
 
     public static Group sortByNames(Group group) throws GroupException {
-        Set<Trainee> sortedSet = new TreeSet();
-        sortedSet.addAll(Arrays.asList(group.getTrainees()));
-        Trainee[] trainees = new Trainee[sortedSet.size()];
-        Iterator it = sortedSet.iterator();
-        int traineesIndex = 0;
-        while(it.hasNext()){
-            trainees[traineesIndex] = (Trainee) it.next();
-            traineesIndex++;
-        }
-        return new Group(group.getName(), trainees);
+        Arrays.sort(group.getTrainees(), Trainee::compareTo);
+        return new Group(group.getName(), group.getTrainees());
     }
 
     public static Trainee findTrainee(Group group, String name){

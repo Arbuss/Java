@@ -14,25 +14,26 @@ public class CollectionsTestMethods {
     }
 
     public static Trainee findTraineeWithMaxMark(List<Trainee> traineeList) throws TraineeException {
-        Trainee maxMarkTrainee = traineeList.get(0);
+        int maxMark = traineeList.get(0).getMark();
+        int traineeIndex = 0;
+
         for(Trainee trainee: traineeList){
-            if(maxMarkTrainee.getMark() < trainee.getMark())
-                maxMarkTrainee = trainee;
+            int tempMark = trainee.getMark();
+            if(maxMark < tempMark) {
+                traineeIndex = traineeList.indexOf(trainee);
+                maxMark = tempMark;
+            }
         }
-        return maxMarkTrainee;
+        return traineeList.get(traineeIndex);
     }
 
     public static List<Trainee> sortedByMarks(List<Trainee> traineeList){
-        Set<Trainee> sortedSet = new TreeSet<>(Comparator.comparingInt(Trainee::getMark));
-        sortedSet.addAll(traineeList);
-        traineeList = new LinkedList<>(sortedSet);
+        traineeList.sort(Comparator.comparingInt(Trainee::getMark));
         return traineeList;
     }
 
     public static List<Trainee> sortedByNames(List<Trainee> traineeList) {
-        Set<Trainee> sortedSet = new TreeSet<>(traineeList);
-        sortedSet.addAll(traineeList);
-        traineeList = new LinkedList<>(sortedSet);
+        traineeList.sort(Trainee::compareTo);
         return traineeList;
     }
 
