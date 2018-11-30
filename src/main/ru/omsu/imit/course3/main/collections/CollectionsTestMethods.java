@@ -14,8 +14,8 @@ public class CollectionsTestMethods {
     }
 
     public static Trainee findTraineeWithMaxMark(List<Trainee> traineeList) throws TraineeException {
-        int maxMark = traineeList.get(0).getMark();
         Trainee maxTrainee = traineeList.get(0);
+        int maxMark = maxTrainee.getMark();
 
         for(Trainee trainee: traineeList){
             int tempMark = trainee.getMark();
