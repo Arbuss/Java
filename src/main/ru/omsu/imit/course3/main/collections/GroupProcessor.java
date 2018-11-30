@@ -1,25 +1,42 @@
 package ru.omsu.imit.course3.main.collections;
 
+import ru.omsu.imit.course3.main.collections.exceptions.GroupException;
 import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class GroupProcessor {
-    public static Group sortByMarks(Group group){
-        return new Group(group.getName(), Arrays.stream(group.getTrainees()).
-                sorted(Comparator.comparingInt(Trainee::getMark))
-                .toArray(Trainee[]::new));
+    public static Group sortByMarks(Group group) throws GroupException {
+        Set<Trainee> sortedSet = new TreeSet(Comparator.comparingInt(Trainee::getMark));
+        sortedSet.addAll(Arrays.asList(group.getTrainees()));
+        Trainee[] trainees = new Trainee[sortedSet.size()];
+        Iterator it = sortedSet.iterator();
+        int traineesIndex = 0;
+        while(it.hasNext()){
+            trainees[traineesIndex] = (Trainee) it.next();
+            traineesIndex++;
+        }
+        return new Group(group.getName(), trainees);
     }
 
-    public static Group sortByNames(Group group){
-        return new Group(group.getName(), Arrays.stream(group.getTrainees()).
-                sorted()
-                .toArray(Trainee[]::new));
+    public static Group sortByNames(Group group) throws GroupException {
+        Set<Trainee> sortedSet = new TreeSet();
+        sortedSet.addAll(Arrays.asList(group.getTrainees()));
+        Trainee[] trainees = new Trainee[sortedSet.size()];
+        Iterator it = sortedSet.iterator();
+        int traineesIndex = 0;
+        while(it.hasNext()){
+            trainees[traineesIndex] = (Trainee) it.next();
+            traineesIndex++;
+        }
+        return new Group(group.getName(), trainees);
     }
 
     public static Trainee findTrainee(Group group, String name){
-        return Arrays.stream(group.getTrainees()).filter(x -> x.getFirstName().equals(name)).findFirst().get();
+        for(Trainee trainee: group.getTrainees())
+            if(trainee.getFirstName().equals(name))
+                return trainee;
+
+        return null;
     }
 }

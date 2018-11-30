@@ -1,36 +1,43 @@
 package ru.omsu.imit.course3.main.collections;
 
+import ru.omsu.imit.course3.main.collections.exceptions.InstituteErrorCodes;
+import ru.omsu.imit.course3.main.collections.exceptions.InstituteException;
+
 import java.util.Objects;
 import java.util.Optional;
 
 public class Institute {
-    Optional<String> name;
-    Optional<String> city;
+    String name;
+    String city;
 
-    public Institute(String name, String city) {
+    public Institute(String name, String city) throws InstituteException {
         setName(name);
         setCity(city);
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
 
-    public void setName(String name) {
-        this.name = Optional.ofNullable(name);
+    public void setName(String name) throws InstituteException {
+        if(name == null)
+            throw new InstituteException(InstituteErrorCodes.NULL_NAME.getErrorText());
+        this.name = name;
     }
 
     public String getCity() {
-        return city.get();
+        return city;
     }
 
-    public void setCity(String city) {
-        this.city = Optional.ofNullable(city);
+    public void setCity(String city) throws InstituteException {
+        if(city == null)
+            throw new InstituteException(InstituteErrorCodes.NULL_CITY.getErrorText());
+        this.city = city;
     }
 
     @Override
     public String toString(){
-        return name.get() + " in the " + city.get();
+        return name + " in the " + city;
     }
 
     @Override

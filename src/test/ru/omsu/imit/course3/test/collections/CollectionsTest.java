@@ -5,6 +5,8 @@ import ru.omsu.imit.course3.main.collections.CollectionsTestMethods;
 import ru.omsu.imit.course3.main.collections.Group;
 import ru.omsu.imit.course3.main.collections.GroupProcessor;
 import ru.omsu.imit.course3.main.collections.Institute;
+import ru.omsu.imit.course3.main.collections.exceptions.GroupException;
+import ru.omsu.imit.course3.main.collections.exceptions.InstituteException;
 import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
 import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
 
@@ -20,15 +22,15 @@ public class CollectionsTest {
     private final int CONST_FOR_BIT_SET_TEST = 1000000;
 
     @Test
-    public void constructorTest() throws TraineeException {
+    public void constructorTest() throws TraineeException, GroupException {
         Trainee[] trainees = {new Trainee("fn1", "sn1", 3),
                 new Trainee("fn2", "sn2", 4)};
         Group group = new Group("mpb-603", trainees);
         assertArrayEquals(trainees, group.getTrainees());
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void groupConstructorWithExceptionTest(){
+    @Test(expected = GroupException.class)
+    public void groupConstructorWithExceptionTest() throws GroupException {
         Group group1 = new Group("mpb-603", null);
         assertEquals(null, group1.getTrainees());
     }
@@ -39,7 +41,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void sortByMarksTest() throws TraineeException {
+    public void sortByMarksTest() throws TraineeException, GroupException {
         Trainee[] trainees = {new Trainee("fn1", "sn1", 3),
                 new Trainee("fn2", "sn2", 5),
                 new Trainee("fn3", "sn3", 4),
@@ -58,7 +60,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void sortByNamesTest() throws TraineeException {
+    public void sortByNamesTest() throws TraineeException, GroupException {
         Trainee[] trainees = {new Trainee("fn1", "sn1", 3),
                 new Trainee("fn2", "sn2", 5),
                 new Trainee("fn3", "sn3", 4),
@@ -78,7 +80,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void findTraineeTest() throws TraineeException {
+    public void findTraineeTest() throws TraineeException, GroupException {
         Trainee[] trainees = {new Trainee("fn1", "sn1", 3),
                 new Trainee("fn2", "sn2", 5),
                 new Trainee("fn3", "sn3", 4),
@@ -312,7 +314,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void hashMapTest() throws TraineeException {
+    public void hashMapTest() throws TraineeException, InstituteException {
         Map<Trainee, Institute>  hashMap = new HashMap();
 
         hashMap.put(new Trainee("fn2", "sn2", 5), new Institute("IMIT", "Omsk"));
@@ -326,7 +328,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void treeMapTest() throws TraineeException {
+    public void treeMapTest() throws TraineeException, InstituteException {
         Map<Trainee, Institute>  treeMap = new TreeMap();
 
         treeMap.put(new Trainee("fn2", "sn2", 5), new Institute("IMIT", "Omsk"));
@@ -341,7 +343,7 @@ public class CollectionsTest {
     }
 
     @Test
-    public void treeMapTest2() throws TraineeException {
+    public void treeMapTest2() throws TraineeException, InstituteException {
         Map<Trainee, Institute>  treeMap = new TreeMap();
         treeMap.put(new Trainee("fn2", "sn2", 5), new Institute("IMIT", "Omsk"));
         treeMap.put(new Trainee("fn1", "sn1", 3), new Institute("IMIT", "Omsk"));
