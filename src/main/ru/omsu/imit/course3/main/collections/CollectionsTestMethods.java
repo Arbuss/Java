@@ -15,16 +15,16 @@ public class CollectionsTestMethods {
 
     public static Trainee findTraineeWithMaxMark(List<Trainee> traineeList) throws TraineeException {
         int maxMark = traineeList.get(0).getMark();
-        int traineeIndex = 0;
+        Trainee maxTrainee = traineeList.get(0);
 
         for(Trainee trainee: traineeList){
             int tempMark = trainee.getMark();
             if(maxMark < tempMark) {
-                traineeIndex = traineeList.indexOf(trainee);
+                maxTrainee = trainee;
                 maxMark = tempMark;
             }
         }
-        return traineeList.get(traineeIndex);
+        return maxTrainee;
     }
 
     public static List<Trainee> sortedByMarks(List<Trainee> traineeList){
