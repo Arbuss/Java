@@ -16,10 +16,7 @@ import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.thre
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.three_task_threads.Thread2;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.three_task_threads.Thread3;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.ThreadsConstants.TEST_NUM_FOR_TASK;
@@ -146,5 +143,62 @@ public class ThreadProcessor {
 
         thread1.start();
         thread2.start();
+    }
+
+    public static void concurrentHashMapThreadsTest(){
+        ConcurrentHashMap<Integer, String> map = new ConcurrentHashMap<>();
+        Random rnd = new Random();
+
+        Thread adder = new Thread(() -> {
+            for(int i = 0; i < TEST_NUM_FOR_TASK / 100; i++)
+                map.add(i, Integer.toString(i));
+        });
+
+        Thread reader = new Thread(() -> {
+            try {
+                for (int i = 0; i < TEST_NUM_FOR_TASK / 100; i++)
+                    map.get(i);
+            } catch(NoSuchElementException el){}
+        });
+
+        Thread randomReader = new Thread(() -> {
+            for(int i = 0; i < 100; i++)
+                map.get(rnd.nextInt(TEST_NUM_FOR_TASK));
+        });
+
+        adder.start();
+        randomReader.start();
+        reader.start();
+    }
+
+    public static void formatter(){
+        Formatter formatter = new Formatter();
+        Date date = new Date();
+
+        Thread thread1 = new Thread(() -> {
+            System.out.println("Thread1: " + formatter.format(date));
+        });
+
+        Thread thread2 = new Thread(() -> {
+            System.out.println("Thread2: " + formatter.format(date));
+        });
+
+        Thread thread3 = new Thread(() -> {
+            System.out.println("Thread3: " + formatter.format(date));
+        });
+
+        Thread thread4 = new Thread(() -> {
+            System.out.println("Thread4: " + formatter.format(date));
+        });
+
+        Thread thread5 = new Thread(() -> {
+            System.out.println("Thread5: " + formatter.format(date));
+        });
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
     }
 }

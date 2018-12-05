@@ -56,4 +56,14 @@ public class MultithreadingTest {
     public void pingPongReentrantTest(){
         ThreadProcessor.pingPongReentrant();
     }
+
+    @Test
+    public void concurrentHashMapTest(){
+        ThreadProcessor.concurrentHashMapThreadsTest();
+    }
+
+    @Test
+    public void formatterTest(){
+        ThreadProcessor.formatter();
+    }
 }
