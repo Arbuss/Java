@@ -1,5 +1,8 @@
 package ru.omsu.imit.course3.main.multithreading_and_synchronization;
 
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Message;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Transport;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.TransportException;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.ThreadsConstants;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.eight_task_threads.Book;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.eight_task_threads.Reader;
@@ -16,6 +19,7 @@ import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.thre
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.three_task_threads.Thread2;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.threads.three_task_threads.Thread3;
 
+import java.io.*;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -200,5 +204,61 @@ public class ThreadProcessor {
         thread3.start();
         thread4.start();
         thread5.start();
+    }
+
+    public static void sender(String filePath){
+        String message = "Eat more of these soft French buns";
+
+        Thread thread1 = new Thread(()->{
+            for(int i = 0; i < 10; i++){
+                String email = null;
+                try {
+                    email = ThreadProcessor.
+                            readEmail(filePath);
+                } catch (java.io.IOException e) {
+
+                }
+                Message message1 = new Message(email, "thread1", "mails.files", message);
+                try {
+                    Transport.send(message1);
+                } catch (TransportException e) { }
+            }
+        });
+
+        Thread thread2 = new Thread(()->{
+            for(int i = 0; i < 10; i++){
+                String email = null;
+                try {
+                    email = ThreadProcessor.
+                            readEmail(filePath);
+                } catch (java.io.IOException e) {
+
+                }
+
+                Message message2 = new Message(email, "thread2", "mails.files", message);
+                try {
+                    Transport.send(message2);
+                } catch (TransportException e) { }
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+
+    public static String readEmail(String filePath) throws IOException {
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+            synchronized (br) {
+                String str = br.readLine();
+                System.out.println(str);
+                return str;
+            }
+        }catch(FileNotFoundException ffe){
+            throw new FileNotFoundException("");
+        }
+    }
+
+    public static void dataQueue(){
+        
     }
 }

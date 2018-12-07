@@ -4,13 +4,15 @@ import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
 import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class CollectionsTestMethods {
     public static List<Trainee> arrayListTestMethods(List<Trainee> traineeList){
-        Collections.reverse(traineeList);
-        Collections.rotate(traineeList, 2);
-        return traineeList;
+        CopyOnWriteArrayList<Trainee> syncList = new CopyOnWriteArrayList<>(traineeList);
+        Collections.reverse(syncList);
+        Collections.rotate(syncList, 2);
+        return syncList;
     }
 
     public static Trainee findTraineeWithMaxMark(List<Trainee> traineeList) throws TraineeException {

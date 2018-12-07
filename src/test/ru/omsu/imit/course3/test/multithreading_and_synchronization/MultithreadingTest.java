@@ -2,6 +2,11 @@ package ru.omsu.imit.course3.test.multithreading_and_synchronization;
 
 import org.junit.Test;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.ThreadProcessor;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Message;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Transport;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.TransportException;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -65,5 +70,12 @@ public class MultithreadingTest {
     @Test
     public void formatterTest(){
         ThreadProcessor.formatter();
+    }
+
+    @Test
+    public void mailingTest() {
+        String path = "src//main//ru//omsu//imit//course3//main//multithreading_and_synchronization//mailing//mails.txt";
+
+        ThreadProcessor.sender(path);
     }
 }

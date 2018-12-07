@@ -12,10 +12,10 @@ public class AddClass extends Thread{
         this.list = list;
     }
 
-    public void run(){
+    public void run() {
         Random random = new Random();
-        synchronized (list) {
-            for (int i = 0; i < ThreadsConstants.TEST_NUM_FOR_TASK; i++) {
+        for (int i = 0; i < ThreadsConstants.TEST_NUM_FOR_TASK; i++) {
+            synchronized (list) {
                 list.add(random.nextInt());
             }
         }

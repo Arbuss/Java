@@ -14,14 +14,10 @@ public class DelClass extends Thread {
 
     public void run() {
         Random random = new Random();
-        synchronized (list) {
-            try {
-                for (int i = 0; i < ThreadsConstants.TEST_NUM_FOR_TASK; i++) {
-                    list.remove(random.nextInt(ThreadsConstants.TEST_NUM_FOR_TASK));
-                }
-            } catch(IndexOutOfBoundsException e){
-
+        try {
+            for (int i = 0; i < ThreadsConstants.TEST_NUM_FOR_TASK; i++) {
+                synchronized (list) {list.remove(random.nextInt(ThreadsConstants.TEST_NUM_FOR_TASK));}
             }
-        }
+        } catch(IndexOutOfBoundsException e){ }
     }
 }
