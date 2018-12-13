@@ -1,5 +1,7 @@
 package ru.omsu.imit.course3.main.multithreading_and_synchronization;
 
+import org.apache.commons.cli.*;
+import ru.omsu.imit.course3.main.multithreading_and_synchronization.fifteen_task.DataQueue;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Message;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.Transport;
 import ru.omsu.imit.course3.main.multithreading_and_synchronization.mailing.TransportException;
@@ -259,6 +261,7 @@ public class ThreadProcessor {
     }
 
     public static void dataQueue(){
+
 
     }
 }
