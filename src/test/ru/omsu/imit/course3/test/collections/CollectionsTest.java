@@ -7,13 +7,12 @@ import ru.omsu.imit.course3.main.collections.GroupProcessor;
 import ru.omsu.imit.course3.main.collections.Institute;
 import ru.omsu.imit.course3.main.collections.exceptions.GroupException;
 import ru.omsu.imit.course3.main.collections.exceptions.InstituteException;
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
-import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
+import ru.omsu.imit.course3.main.first.task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first.task.trainee.TraineeException;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static java.util.concurrent.TimeUnit.*;
 import static org.junit.Assert.*;
 
 public class CollectionsTest {

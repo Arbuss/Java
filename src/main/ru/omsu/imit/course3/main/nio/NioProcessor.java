@@ -1,12 +1,10 @@
 package ru.omsu.imit.course3.main.nio;
 
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
-import ru.omsu.imit.course3.main.first_task.trainee.TraineeInput;
-import ru.omsu.imit.course3.main.first_task.trainee.TraineeOutput;
+import ru.omsu.imit.course3.main.first.task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first.task.trainee.TraineeInput;
+import ru.omsu.imit.course3.main.first.task.trainee.TraineeOutput;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 

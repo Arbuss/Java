@@ -1,7 +1,7 @@
 package ru.omsu.imit.course3.main.collections;
 
 import ru.omsu.imit.course3.main.collections.exceptions.GroupException;
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first.task.trainee.Trainee;
 
 import java.util.*;
 

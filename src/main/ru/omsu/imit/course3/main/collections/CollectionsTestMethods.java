@@ -1,11 +1,10 @@
 package ru.omsu.imit.course3.main.collections;
 
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
-import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
+import ru.omsu.imit.course3.main.first.task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first.task.trainee.TraineeException;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class CollectionsTestMethods {
     public static List<Trainee> arrayListTestMethods(List<Trainee> traineeList){

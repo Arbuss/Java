@@ -1,13 +1,8 @@
 package ru.omsu.imit.course3.main.nio;
 
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 

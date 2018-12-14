@@ -1,7 +1,7 @@
 package ru.omsu.imit.course3.main.nio;
 
-import ru.omsu.imit.course3.main.first_task.trainee.Trainee;
-import ru.omsu.imit.course3.main.first_task.trainee.TraineeException;
+import ru.omsu.imit.course3.main.first.task.trainee.Trainee;
+import ru.omsu.imit.course3.main.first.task.trainee.TraineeException;
 
 import java.io.*;
 import java.nio.ByteBuffer;
