@@ -1,6 +1,6 @@
 package ru.omsu.imit.course3.main.first.task.rectangle;
 
-import ru.omsu.imit.course3.main.first_task.rectangle.*;
+import ru.omsu.imit.course3.main.first.task.rectangle.*;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;

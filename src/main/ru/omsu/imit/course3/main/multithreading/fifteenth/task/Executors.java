@@ -9,18 +9,17 @@ public class Executors extends Thread{
         this.queue = queue;
     }
 
-    public Data read(){
-        return queue.poll();
+    public Data read() throws InterruptedException {
+        return queue.take();
     }
 
     public void run(){
-        for(int i = 0; i < 10; i++) {
-            System.out.println(Arrays.toString(read().get()));
+        while(true) {
             try {
-                Thread.sleep(50);
+                System.out.println(Arrays.toString(read().get()));
             } catch (InterruptedException e) {
-
             }
+
         }
     }
 }

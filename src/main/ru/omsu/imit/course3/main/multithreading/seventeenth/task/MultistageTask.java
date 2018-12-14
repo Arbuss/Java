@@ -8,10 +8,12 @@ import java.util.List;
 
 public class MultistageTask implements Executable, Comparable {
     private List<Executable> stages;
+    private int size;
     private String name;
 
     public MultistageTask(String name, Executable ...stages){
         this.stages = new LinkedList<>();
+        size = stages.length;
         this.stages.addAll(Arrays.asList(stages));
     }
 
@@ -42,6 +44,10 @@ public class MultistageTask implements Executable, Comparable {
         } catch (CompleteTaskException e) {
 
         }
+    }
+
+    public int getSize(){
+        return size;
     }
 
     public String getName(){

@@ -13,8 +13,11 @@ public class Developer extends Thread{
     }
 
     public void run(){
-        for(int i = 0; i < 10; i++) {
-            write();
+        while(true) {
+            if(queue.remainingCapacity() > 0) {
+                System.out.println("im write");
+                write();
+            }
         }
     }
 }

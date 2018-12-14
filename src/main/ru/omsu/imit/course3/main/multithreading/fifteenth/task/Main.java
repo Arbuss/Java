@@ -4,7 +4,7 @@ import org.apache.commons.cli.*;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        DataQueue queue = new DataQueue();
+        DataQueue queue = new DataQueue(16);
 
         Option wCount = new Option("w", "writers", true, "кол-во писателей");
         Option rCount = new Option("r", "readers", true, "кол-во читателей");

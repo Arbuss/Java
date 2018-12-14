@@ -2,24 +2,22 @@ package ru.omsu.imit.course3.main.multithreading.fifteenth.task;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class DataQueue {
-    private Queue<Data> queue;
-    private ReadWriteLock locker;
+    private ArrayBlockingQueue<Data> queue;
 
-    public DataQueue(){
-        queue = new PriorityQueue<>();
-        locker = new ReentrantReadWriteLock();
+    public DataQueue(int capacity){
+        queue = new ArrayBlockingQueue<>(capacity);
     }
 
     public void add(Data elem){
-        Lock writeLock = locker.writeLock();
-        writeLock.lock();
         queue.add(elem);
-        writeLock.unlock();
     }
 
     public Data peek(){
@@ -27,10 +25,18 @@ public class DataQueue {
     }
 
     public Data poll(){
-        Lock readLock = locker.readLock();
-        readLock.lock();
-        Data data = queue.poll();
-        readLock.unlock();
-        return data;
+        return queue.poll();
+    }
+
+    public Data poll(long timeout) throws InterruptedException {
+        return queue.poll(timeout, TimeUnit.MILLISECONDS);
+    }
+
+    public Data take() throws InterruptedException {
+        return queue.take();
+    }
+
+    public int remainingCapacity(){
+        return queue.remainingCapacity();
     }
 }

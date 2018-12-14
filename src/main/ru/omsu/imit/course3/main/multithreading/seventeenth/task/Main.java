@@ -1,13 +1,10 @@
 package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
 import org.apache.commons.cli.*;
-import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Developer;
-import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executor;
-import ru.omsu.imit.course3.main.multithreading.sixteenth.task.TaskQueue;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        TaskQueue queue = new TaskQueue();
+        MultistageTaskQueue queue = new MultistageTaskQueue();
 
         Option dCount = new Option("d", "developers", true, "кол-во разработчиков");
         Option eCount = new Option("e", "executors", true, "кол-во исполнителей");
@@ -46,12 +43,16 @@ public class Main {
             developers[i] = new Developer(queue);
         }
 
+        Watcher watcher = new Watcher(executors);
+
         for(Developer developer: developers){
-            developer.run();
+            developer.start();
         }
 
         for(Executor executor: executors){
-            executor.run();
+            executor.start();
         }
+
+        watcher.run();
     }
 }

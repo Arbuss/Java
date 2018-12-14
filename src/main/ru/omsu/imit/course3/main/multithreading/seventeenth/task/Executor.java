@@ -4,13 +4,26 @@ import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 
 public class Executor extends Thread{
     private MultistageTaskQueue queue;
+    private MultistageTask mTask;
 
     public Executor(MultistageTaskQueue queue){
         this.queue = queue;
     }
 
+    public String getTaskName(){
+        return mTask.getName();
+    }
+
+    public int getStagesCount(){
+        return mTask.getSize();
+    }
+
+    public int getStageNumber(){
+        return mTask.getStagesNum();
+    }
+
     public void doThis(){
-        MultistageTask mTask = queue.poll();
+        mTask = queue.poll();
         if(!mTask.hasStage()){
             return;
         }
