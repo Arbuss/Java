@@ -4,7 +4,7 @@ import org.apache.commons.cli.*;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        TaskQueue queue = new TaskQueue();
+        TaskQueue queue = new TaskQueue(16);
 
         Option dCount = new Option("d", "developers", true, "кол-во разработчиков");
         Option eCount = new Option("e", "executors", true, "кол-во исполнителей");

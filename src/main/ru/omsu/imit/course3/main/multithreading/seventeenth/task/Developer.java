@@ -14,11 +14,15 @@ public class Developer extends Thread{
         Task task1 = new Task();
 
         MultistageTask mTask = new MultistageTask("task" + Thread.currentThread().getId(),task, task1);
-        queue.add(mTask);
+        try {
+            queue.put(mTask);
+        } catch (InterruptedException e) {
+
+        }
     }
 
     public void run(){
-        for(int i = 0; i < 10; i++){
+        while(true){
             develop();
         }
     }

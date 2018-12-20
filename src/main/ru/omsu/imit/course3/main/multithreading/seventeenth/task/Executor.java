@@ -10,20 +10,24 @@ public class Executor extends Thread{
         this.queue = queue;
     }
 
-    public String getTaskName(){
+    public String getTaskName() throws NullPointerException{
         return mTask.getName();
     }
 
-    public int getStagesCount(){
+    public int getStagesCount() throws NullPointerException {
         return mTask.getSize();
     }
 
-    public int getStageNumber(){
+    public int getStageNumber() throws NullPointerException {
         return mTask.getStagesNum();
     }
 
-    public void doThis(){
-        mTask = queue.poll();
+    public void doThis()  {
+        try {
+            mTask = queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(!mTask.hasStage()){
             return;
         }
@@ -32,13 +36,16 @@ public class Executor extends Thread{
             Executable task = mTask.getStage();
             task.execute();
             if(mTask.hasStage()){
-                queue.add(mTask);
+                queue.put(mTask);
             }
         } catch (CompleteTaskException e) {
+        } catch (InterruptedException e) {
         }
     }
 
     public void run(){
-        doThis();
+        while(true) {
+            doThis();
+        }
     }
 }

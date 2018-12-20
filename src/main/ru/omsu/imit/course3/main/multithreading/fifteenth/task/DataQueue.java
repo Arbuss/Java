@@ -20,6 +20,10 @@ public class DataQueue {
         queue.add(elem);
     }
 
+    public void put(Data elem) throws InterruptedException {
+        queue.put(elem);
+    }
+
     public Data peek(){
         return queue.peek();
     }

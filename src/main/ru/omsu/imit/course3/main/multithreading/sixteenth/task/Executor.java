@@ -8,8 +8,12 @@ public class Executor extends Thread{
     }
 
     public void run(){
-        for(int i = 0; i < 10; i++){
-            queue.poll().execute();
+        while(true){
+            try {
+                queue.take().execute();
+            } catch (InterruptedException e) {
+
+            }
         }
     }
 }

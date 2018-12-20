@@ -7,17 +7,19 @@ public class Developer extends Thread{
         this.queue = queue;
     }
 
-    public void write(){
+    public void write() throws InterruptedException {
         Data data = new Data();
-        queue.add(data);
+        queue.put(data);
     }
 
     public void run(){
         while(true) {
-            if(queue.remainingCapacity() > 0) {
-                System.out.println("im write");
+            try {
                 write();
+            } catch (InterruptedException e) {
+
             }
         }
+
     }
 }

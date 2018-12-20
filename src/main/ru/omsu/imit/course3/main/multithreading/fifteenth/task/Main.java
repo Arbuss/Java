@@ -44,11 +44,11 @@ public class Main {
         }
 
         for(Developer writer: writers){
-            writer.run();
+            writer.start();
         }
 
         for(Executors reader: readers){
-            reader.run();
+            reader.start();
         }
     }
 }

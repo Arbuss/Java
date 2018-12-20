@@ -1,36 +1,19 @@
 package ru.omsu.imit.course3.main.multithreading.sixteenth.task;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class TaskQueue {
-    private Queue<Executable> queue;
-    private ReadWriteLock locker;
+    private ArrayBlockingQueue<Executable> queue;
 
-    public TaskQueue(){
-        queue = new PriorityQueue<>();
-        locker = new ReentrantReadWriteLock();
+    public TaskQueue(int capacity){
+        queue = new ArrayBlockingQueue<>(capacity);
     }
 
-    public void add(Executable task){
-        Lock writeLock = locker.writeLock();
-        writeLock.lock();
-        queue.add(task);
-        writeLock.unlock();
+    public void put(Executable task) throws InterruptedException {
+        queue.put(task);
     }
 
-    public Executable peek(){
-        return queue.peek();
-    }
-
-    public Executable poll(){
-        Lock readLock = locker.readLock();
-        readLock.lock();
-        Executable task = queue.poll();
-        readLock.unlock();
-        return task;
+    public Executable take() throws InterruptedException {
+        return queue.take();
     }
 }

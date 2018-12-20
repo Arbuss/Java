@@ -7,18 +7,22 @@ public class Developer extends Thread{
         this.queue = queue;
     }
 
-    public void develop(){
+    public void develop() throws InterruptedException {
         Task task = new Task();
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
         }
-        queue.add(task);
+        queue.put(task);
     }
 
     public void run(){
-        for(int i = 0; i < 10; i++){
-            develop();
+        while(true){
+            try {
+                develop();
+            } catch (InterruptedException e) {
+
+            }
         }
     }
 }
