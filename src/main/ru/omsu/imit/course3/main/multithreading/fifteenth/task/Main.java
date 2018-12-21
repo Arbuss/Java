@@ -50,5 +50,20 @@ public class Main {
         for(Executors reader: readers){
             reader.start();
         }
+
+
+        for(Developer writer: writers){
+            try {
+                writer.join();
+            } catch (InterruptedException e) {
+
+            }
+        }
+        try {
+            queue.addPoison();
+        } catch (InterruptedException e) {
+            
+        }
+
     }
 }
