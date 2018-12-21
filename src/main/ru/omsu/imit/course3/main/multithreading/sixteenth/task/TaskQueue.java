@@ -1,5 +1,7 @@
 package ru.omsu.imit.course3.main.multithreading.sixteenth.task;
 
+import ru.omsu.imit.course3.main.multithreading.fifteenth.task.Poison;
+
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class TaskQueue {
@@ -15,5 +17,9 @@ public class TaskQueue {
 
     public Executable take() throws InterruptedException {
         return queue.take();
+    }
+
+    public void addPoison() throws InterruptedException {
+        queue.put(new ru.omsu.imit.course3.main.multithreading.sixteenth.task.Poison());
     }
 }

@@ -50,5 +50,21 @@ public class Main {
         for(Executor executor: executors){
             executor.run();
         }
+
+        for(Developer developer: developers){
+            try {
+                developer.join();
+            } catch (InterruptedException e) {
+
+            }
+        }
+
+        for(int i = 0; i < developers.length; i++) {
+            try {
+                queue.addPoison();
+            } catch (InterruptedException e) {
+
+            }
+        }
     }
 }

@@ -59,11 +59,12 @@ public class Main {
 
             }
         }
-        try {
-            queue.addPoison();
-        } catch (InterruptedException e) {
-            
-        }
+        for(int i = 0; i < writers.length; i++) {
+            try {
+                queue.addPoison();
+            } catch (InterruptedException e) {
 
+            }
+        }
     }
 }
