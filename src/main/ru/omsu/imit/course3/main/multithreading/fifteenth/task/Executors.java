@@ -20,20 +20,12 @@ public class Executors extends Thread{
     }
 
     public void run(){
-        try (BufferedOutputStream bos = new BufferedOutputStream(System.out)) {
-            for(int i = 0; i < repeatCount; i++) {
-                try {
-                    byte[] bytes = Arrays.toString(read().get()).getBytes();
-                    bos.write(bytes);
-                }
-                catch(BufferOverflowException e){
-                    bos.flush();
-                }
-                catch (InterruptedException e) {
-
-                }
+        Data data;
+        try {
+            while ((data = read()).getClass() != Poison.class) {
+                Arrays.stream(data.get()).forEach(System.out::println);
             }
-        } catch (IOException e) {
+        } catch (InterruptedException e) {
 
         }
     }

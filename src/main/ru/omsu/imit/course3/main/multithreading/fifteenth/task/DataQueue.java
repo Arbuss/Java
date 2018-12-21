@@ -40,6 +40,10 @@ public class DataQueue {
         return queue.take();
     }
 
+    public void addPoison() throws InterruptedException {
+        queue.put(new Poison());
+    }
+
     public int remainingCapacity(){
         return queue.remainingCapacity();
     }

@@ -36,11 +36,11 @@ public class Main {
         Developer[] developers = new Developer[developersCount];
 
         for(int i = 0; i < executorsCount; i++){
-            executors[i] = new Executor(queue);
+            executors[i] = new Executor(queue, 10);
         }
 
         for(int i = 0; i < developersCount; i++){
-            developers[i] = new Developer(queue);
+            developers[i] = new Developer(queue, 10);
         }
 
         for(Developer developer: developers){

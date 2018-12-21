@@ -22,6 +22,10 @@ public class Developer extends Thread{
 
             }
         }
+        try {
+            queue.addPoison();
+        } catch (InterruptedException e) {
 
+        }
     }
 }
