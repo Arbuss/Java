@@ -1,5 +1,7 @@
 package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
+import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -21,4 +23,17 @@ public class MultistageTaskQueue {
     public MultistageTask take() throws InterruptedException {
         return queue.take();
     }
+
+    /*public MultistageTask take() throws InterruptedException, CompleteTaskException {
+        MultistageTask mTask = queue.take();
+        if(!mTask.hasStage())
+            throw new NullPointerException();
+
+         Executable task = mTask.getStage();
+
+         if(mTask.hasStage())
+             queue.put(mTask);
+
+         return task;
+    }*/
 }

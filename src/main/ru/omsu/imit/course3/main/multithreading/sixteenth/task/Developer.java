@@ -2,9 +2,11 @@ package ru.omsu.imit.course3.main.multithreading.sixteenth.task;
 
 public class Developer extends Thread{
     private TaskQueue queue;
+    private int repeatCount;
 
-    public Developer(TaskQueue queue){
+    public Developer(TaskQueue queue, int repeatCount){
         this.queue = queue;
+        this.repeatCount = repeatCount;
     }
 
     public void develop() throws InterruptedException {
@@ -17,7 +19,7 @@ public class Developer extends Thread{
     }
 
     public void run(){
-        while(true){
+        for(int i = 0; i < repeatCount; i++){
             try {
                 develop();
             } catch (InterruptedException e) {

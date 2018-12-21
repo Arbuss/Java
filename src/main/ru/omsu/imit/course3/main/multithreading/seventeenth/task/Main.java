@@ -36,11 +36,11 @@ public class Main {
         Developer[] developers = new Developer[developersCount];
 
         for(int i = 0; i < executorsCount; i++){
-            executors[i] = new Executor(queue);
+            executors[i] = new Executor(queue, 3);
         }
 
         for(int i = 0; i < developersCount; i++){
-            developers[i] = new Developer(queue);
+            developers[i] = new Developer(queue, 3);
         }
 
         Watcher watcher = new Watcher(executors);
@@ -53,6 +53,6 @@ public class Main {
             executor.start();
         }
 
-        watcher.run();
+        watcher.start();
     }
 }

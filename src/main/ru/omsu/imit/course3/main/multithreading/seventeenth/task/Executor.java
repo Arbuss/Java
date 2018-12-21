@@ -5,9 +5,11 @@ import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 public class Executor extends Thread{
     private MultistageTaskQueue queue;
     private MultistageTask mTask;
+    private int repeatCount;
 
-    public Executor(MultistageTaskQueue queue){
+    public Executor(MultistageTaskQueue queue, int repeatCount){
         this.queue = queue;
+        this.repeatCount = repeatCount;
     }
 
     public String getTaskName() throws NullPointerException{
@@ -26,7 +28,7 @@ public class Executor extends Thread{
         try {
             mTask = queue.take();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+
         }
         if(!mTask.hasStage()){
             return;
@@ -44,7 +46,7 @@ public class Executor extends Thread{
     }
 
     public void run(){
-        while(true) {
+        for(int i = 0; i < repeatCount; i++) {
             doThis();
         }
     }
