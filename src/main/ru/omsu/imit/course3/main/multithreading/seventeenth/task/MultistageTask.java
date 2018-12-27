@@ -2,68 +2,59 @@ package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
 import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class MultistageTask implements Executable, Comparable {
-    private List<Executable> stages;
-    private int size;
+import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.taskCount;
+
+public class MultistageTask{
+    private LinkedList<Executable> stages;
     private String name;
+    private int stagesCount;
 
-    public MultistageTask(String name, Executable ...stages){
-        this.stages = new LinkedList<>();
-        size = stages.length;
-        this.stages.addAll(Arrays.asList(stages));
+    public MultistageTask(String name, Executable ...stages) {
+        this(name, Arrays.asList(stages));
     }
 
-    public MultistageTask(MultistageTask mTask, String name){
-        this(name, (Executable[]) mTask.getStages().toArray());
+    public MultistageTask(String name, List<Executable> stages) {
+        this.stages = new LinkedList<>(stages);
+        this.name = name;
+        stagesCount = stages.size();
     }
 
-    public Executable getStage() throws CompleteTaskException {
-        if(!stages.isEmpty())
-            return stages.get(0);
-        else
-            throw new CompleteTaskException("All stages complete");
+    public MultistageTask(){
+        stages = new LinkedList();
     }
 
-    public List<Executable> getStages(){
-        return stages;
-    }
-
-    @Override
-    public synchronized void execute() {
-        try {
-            Thread.sleep(500);
-            Executable stage = getStage();
-            stages.remove(stage);
-            System.out.println("Task completed");
-        } catch (InterruptedException e) {
-
-        } catch (CompleteTaskException e) {
-
-        }
-    }
-
-    public int getSize(){
-        return size;
-    }
-
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public boolean hasStage(){
-        return stages.size() != 0;
+    public synchronized boolean hasStage(){
+        return stages.size() > 0;
     }
 
-    public int getStagesNum(){
-        return stages.size();
+    public Executable getStage(){
+        try {
+            synchronized (stages) {
+                Executable stage = stages.pollFirst();
+                return stage;
+            }
+
+        } catch(IndexOutOfBoundsException e){
+            return null;
+        }
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public String toString() {
+        synchronized (stages) {
+            return name + " " + stages.size() + "/" + stagesCount;
+        }
     }
+
+    public synchronized void setPoison(){
+        stages.add(new Poison());
+    }
+
+
 }

@@ -1,31 +1,40 @@
 package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
+import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Task;
 
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.taskCount;
+
 public class Developer extends Thread{
-    private MultistageTaskQueue queue;
-    private int repeatCount;
+    private ArrayBlockingQueue<MultistageTask> queue;
 
-    public Developer(MultistageTaskQueue queue, int repeatCount){
+    public Developer(ArrayBlockingQueue<MultistageTask> queue) {
         this.queue = queue;
-        this.repeatCount = repeatCount;
     }
 
-    private void develop(){
-        Task task = new Task();
-        Task task1 = new Task();
+    private MultistageTask develop(){
+        Executable[] tasks = new Task[3];
 
-        MultistageTask mTask = new MultistageTask("task" + Thread.currentThread().getId(),task, task1);
-        try {
-            queue.put(mTask);
-        } catch (InterruptedException e) {
-
+        for(int i = 0; i < 3; i++){
+            taskCount.incrementAndGet();
+            tasks[0] = new Task();
         }
+
+        return new MultistageTask(Thread.currentThread().getName() + "task", tasks);
     }
 
-    public void run(){
-        for(int i = 0; i < repeatCount; i++){
-            develop();
+    @Override
+    public void run() {
+        for(int i = 0; i < 5; i++){
+            try {
+                queue.put(develop());
+            } catch (InterruptedException e) {
+
+            }
         }
     }
 }

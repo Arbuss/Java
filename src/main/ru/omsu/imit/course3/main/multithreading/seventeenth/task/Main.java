@@ -2,10 +2,13 @@ package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
 import org.apache.commons.cli.*;
 
-public class Main {
-    public static void main(String[] args) throws ParseException {
-        MultistageTaskQueue queue = new MultistageTaskQueue(16);
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
+public class Main {
+    public static volatile AtomicInteger taskCount = new AtomicInteger(0);
+
+    public static void main(String[] args) throws ParseException {
         Option dCount = new Option("d", "developers", true, "кол-во разработчиков");
         Option eCount = new Option("e", "executors", true, "кол-во исполнителей");
         Options options = new Options();
@@ -32,18 +35,19 @@ public class Main {
             executorsCount = 2;
         }
 
+        ArrayBlockingQueue<MultistageTask> queue = new ArrayBlockingQueue(developersCount * 10);
         Executor[] executors = new Executor[executorsCount];
         Developer[] developers = new Developer[developersCount];
 
         for(int i = 0; i < executorsCount; i++){
-            executors[i] = new Executor(queue, 3);
+            executors[i] = new Executor(queue);
         }
 
         for(int i = 0; i < developersCount; i++){
-            developers[i] = new Developer(queue, 3);
+            developers[i] = new Developer(queue);
         }
 
-        Watcher watcher = new Watcher(executors);
+        Watcher watcher = new Watcher(queue);
 
         for(Developer developer: developers){
             developer.start();
@@ -52,7 +56,8 @@ public class Main {
         for(Executor executor: executors){
             executor.start();
         }
-
+        
         watcher.start();
+
     }
 }

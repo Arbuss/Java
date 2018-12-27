@@ -2,52 +2,44 @@ package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
 import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
+import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.taskCount;
+
 public class Executor extends Thread{
-    private MultistageTaskQueue queue;
-    private MultistageTask mTask;
-    private int repeatCount;
+    private ArrayBlockingQueue<MultistageTask> queue;
 
-    public Executor(MultistageTaskQueue queue, int repeatCount){
+    public Executor(ArrayBlockingQueue<MultistageTask> queue) {
         this.queue = queue;
-        this.repeatCount = repeatCount;
     }
 
-    public String getTaskName() throws NullPointerException{
-        return mTask.getName();
-    }
-
-    public int getStagesCount() throws NullPointerException {
-        return mTask.getSize();
-    }
-
-    public int getStageNumber() throws NullPointerException {
-        return mTask.getStagesNum();
-    }
-
-    public void doThis()  {
+    private Executable getTask(){
         try {
-            mTask = queue.take();
-        } catch (InterruptedException e) {
-
-        }
-        if(!mTask.hasStage()){
-            return;
-        }
-
-        try {
+            MultistageTask mTask = queue.take();
             Executable task = mTask.getStage();
-            task.execute();
             if(mTask.hasStage()){
                 queue.put(mTask);
             }
-        } catch (CompleteTaskException e) {
+
+            return task;
         } catch (InterruptedException e) {
+            return null;
         }
     }
 
-    public void run(){
-        for(int i = 0; i < repeatCount; i++) {
-            doThis();
+    @Override
+    public void run() {
+        while (true){
+            Executable task = getTask();
+            if(task != null ) {
+                if (task.getClass() == Poison.class){
+                    break;
+                }
+                task.execute();
+                if(taskCount.get()  <= 0){
+                    break;
+                }
+            }
         }
     }
 }
