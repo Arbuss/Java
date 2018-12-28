@@ -6,9 +6,11 @@ import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.tas
 
 public class Watcher extends Thread{
     private ArrayBlockingQueue<MultistageTask> queue;
+    private int executorsCount;
 
-    public Watcher(ArrayBlockingQueue<MultistageTask> queue) {
+    public Watcher(ArrayBlockingQueue<MultistageTask> queue, int executorsCount) {
         this.queue = queue;
+        this.executorsCount = executorsCount;
     }
 
     @Override
@@ -27,6 +29,16 @@ public class Watcher extends Thread{
             }
 
             if(taskCount.get() <= 0){
+                for(int i = 0; i < executorsCount; i++){
+                    MultistageTask poison = new MultistageTask();
+                    poison.setPoison();
+                    try {
+                        queue.put(poison);
+                    } catch (InterruptedException e) {
+
+                    }
+                }
+
                 break;
             }
         }

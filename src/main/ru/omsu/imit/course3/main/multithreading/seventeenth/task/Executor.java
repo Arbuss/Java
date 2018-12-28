@@ -33,12 +33,12 @@ public class Executor extends Thread{
     public void run() {
         while (true){
             Executable task = getTask();
+            if(task.getClass() == Poison.class){
+                break;
+            }
             if(task != null ) {
                 taskCount.decrementAndGet();
                 task.execute();
-            }
-            if(taskCount.get()  <= 0){
-                break;
             }
         }
     }

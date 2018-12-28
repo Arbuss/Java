@@ -51,7 +51,7 @@ public class Main {
             developers[i] = new Developer(queue, STAGES_COUNT);
         }
 
-        Watcher watcher = new Watcher(queue);
+        Watcher watcher = new Watcher(queue, executorsCount);
 
         for(Developer developer: developers){
             developer.start();
