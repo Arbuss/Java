@@ -56,5 +56,11 @@ public class MultistageTask{
         stages.add(new Poison());
     }
 
+    public synchronized LinkedList<Executable> getStages(){
+        return stages;
+    }
 
+    public synchronized void setStages(LinkedList<Executable> list){
+        this.stages = list;
+    }
 }

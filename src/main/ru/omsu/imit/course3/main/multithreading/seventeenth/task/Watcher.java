@@ -15,15 +15,17 @@ public class Watcher extends Thread{
     public void run() {
         while(true) {
             System.out.println("-------");
+            System.out.println("remaining stages " + taskCount.get());
             for (MultistageTask mTask : queue) {
                 System.out.println(mTask.toString());
             }
             System.out.println("-------");
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
 
             }
+
             if(taskCount.get() <= 0){
                 break;
             }

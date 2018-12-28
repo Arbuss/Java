@@ -6,6 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
+    public static int MULTISTAGE_TASK_COUNT = 5;
     public static volatile AtomicInteger taskCount = new AtomicInteger(0);
 
     public static void main(String[] args) throws ParseException {
@@ -35,7 +36,7 @@ public class Main {
             executorsCount = 2;
         }
 
-        ArrayBlockingQueue<MultistageTask> queue = new ArrayBlockingQueue(developersCount * 10);
+        ArrayBlockingQueue<MultistageTask> queue = new ArrayBlockingQueue(developersCount*5);
         Executor[] executors = new Executor[executorsCount];
         Developer[] developers = new Developer[developersCount];
 
@@ -58,6 +59,5 @@ public class Main {
         }
         
         watcher.start();
-
     }
 }

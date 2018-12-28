@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.MULTISTAGE_TASK_COUNT;
 import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.taskCount;
 
 public class Developer extends Thread{
@@ -21,7 +22,7 @@ public class Developer extends Thread{
 
         for(int i = 0; i < 3; i++){
             taskCount.incrementAndGet();
-            tasks[0] = new Task();
+            tasks[i] = new Task();
         }
 
         return new MultistageTask(Thread.currentThread().getName() + "task", tasks);
@@ -29,7 +30,7 @@ public class Developer extends Thread{
 
     @Override
     public void run() {
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < MULTISTAGE_TASK_COUNT; i++){
             try {
                 queue.put(develop());
             } catch (InterruptedException e) {

@@ -2,6 +2,8 @@ package ru.omsu.imit.course3.main.multithreading.seventeenth.task;
 
 import ru.omsu.imit.course3.main.multithreading.sixteenth.task.Executable;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.taskCount;
@@ -32,13 +34,11 @@ public class Executor extends Thread{
         while (true){
             Executable task = getTask();
             if(task != null ) {
-                if (task.getClass() == Poison.class){
-                    break;
-                }
+                taskCount.decrementAndGet();
                 task.execute();
-                if(taskCount.get()  <= 0){
-                    break;
-                }
+            }
+            if(taskCount.get()  <= 0){
+                break;
             }
         }
     }

@@ -7,7 +7,6 @@ import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.tas
 public class Task implements Executable {
     @Override
     public void execute() {
-        taskCount.decrementAndGet();
         System.out.println("task complete");
     }
 
