@@ -12,16 +12,17 @@ import static ru.omsu.imit.course3.main.multithreading.seventeenth.task.Main.tas
 
 public class Developer extends Thread{
     private ArrayBlockingQueue<MultistageTask> queue;
+    private int stagesCount;
 
-    public Developer(ArrayBlockingQueue<MultistageTask> queue) {
+    public Developer(ArrayBlockingQueue<MultistageTask> queue, int stagesCount) {
         this.queue = queue;
+        this.stagesCount = stagesCount;
     }
 
     private MultistageTask develop(){
         Executable[] tasks = new Task[3];
 
-        for(int i = 0; i < 3; i++){
-            taskCount.incrementAndGet();
+        for(int i = 0; i < stagesCount; i++){
             tasks[i] = new Task();
         }
 
@@ -34,7 +35,7 @@ public class Developer extends Thread{
             try {
                 queue.put(develop());
             } catch (InterruptedException e) {
-
+                System.out.println("interrupted exception on developer" + Thread.currentThread().getId());
             }
         }
     }
